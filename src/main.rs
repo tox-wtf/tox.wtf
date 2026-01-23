@@ -34,7 +34,13 @@ fn render_error_pages(env: &Environment) -> Result<()> {
 fn should_template<P: AsRef<Path>>(path: P) -> bool {
     let path = path.as_ref();
     eprint!("Checking if we should template {path:?}... ");
-    let should_render = path.is_file() &&
+
+    let should_render =
+        !path.starts_with("subdomains/lfs/lfs") &&
+        !path.starts_with("subdomains/lfs/blfs") &&
+        !path.starts_with("subdomains/lfs/glfs") &&
+        !path.starts_with("subdomains/lfs/slfs") &&
+        path.is_file() &&
         path.extension().is_some_and(|e| e == OsStr::new("html")) &&
         path.file_name().is_some_and(|e| !matches!(e.as_encoded_bytes(), b"base.html" | b"macros.html")) &&
         path.iter().all(|p| p != OsStr::new("e"));
@@ -143,6 +149,11 @@ fn main() -> Result<()> {
     add_template_from_path(&mut env, "subdomains/vat/index.html")?;
     add_template_from_path(&mut env, "subdomains/vat/base.html")?;
     render_subdomain_pages(&env, "vat")?;
+
+    env.clear_templates();
+    add_template_from_path(&mut env, "subdomains/lfs/index.html")?;
+    add_template_from_path(&mut env, "subdomains/lfs/base.html")?;
+    render_subdomain_pages(&env, "lfs")?;
 
     Ok(())
 }
