@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
 {% block header %}
-    {{ macros.pwd(["pkgs", "less"]) }}
+    {{ m.pwd(["pkgs", "less"]) }}
 {% endblock %}
 
 {% block content %}
 <h3>::: Text pager</h3>
 
-<pre><code>git clone --depth=1 https://github.com/gwsw/less .
+{% call m.codeblock() %}
+git clone --depth=1 https://github.com/gwsw/less .
 
 make -f Makefile.aut distfiles
 autoreconf -fiv
@@ -19,6 +20,6 @@ autoreconf -fiv
 
 make
 make install
-</code></pre>
+{% endcall %}
 
 {% endblock %}

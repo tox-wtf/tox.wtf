@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 
 {% block header %}
-    {{ macros.pwd(["pkgs", "catgirl"]) }}
+    {{ m.pwd(["pkgs", "catgirl"]) }}
 {% endblock %}
 
 {% block content %}
 <h3>::: Terminal irc client</h3>
 
-<pre>
-<code>
+{% call m.codeblock() %}
 git clone --depth=1 https://git.causal.agency/catgirl .
 
 sed -i '/dev:/d' Makefile
@@ -16,7 +15,6 @@ sed -i '/dev:/d' Makefile
 ./configure --prefix=/usr --mandir=/usr/share/man
 make
 make install
-</code>
-</pre>
+{% endcall %}
 
 {% endblock %}

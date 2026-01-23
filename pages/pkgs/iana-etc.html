@@ -1,18 +1,17 @@
 {% extends "base.html" %}
 
 {% block header %}
-    {{ macros.pwd(["pkgs", "iana-etc"]) }}
+    {{ m.pwd(["pkgs", "iana-etc"]) }}
 {% endblock %}
 
 {% block content %}
 <h3>::: IANA's services and protocols</h3>
 
-{% raw %}
-<pre><code>curl -fsSL 'https://api.github.com/repos/mic92/iana-etc/releases?per_page=1&page=1' |
+{% call m.codeblock() %}
+curl -fsSL 'https://api.github.com/repos/mic92/iana-etc/releases?per_page=1&page=1' |
     jq .[].assets[0].browser_download_url -r |
     xargs curl -fsSL |
     tar --strip-components=1 -xzvf - --wildcards '*'/{services,protocols} -C /etc
-</code></pre>
-{% endraw %}
+{% endcall %}
 
 {% endblock %}

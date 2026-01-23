@@ -1,19 +1,17 @@
 {% extends "base.html" %}
 
 {% block header %}
-    {{ macros.pwd(["pkgs", "hwdata"]) }}
+    {{ m.pwd(["pkgs", "hwdata"]) }}
 {% endblock %}
 
 {% block content %}
 <h3>::: Hardware identification and configuration data</h3>
 
-<pre>
-<code>
+{% call m.codeblock() %}
 git clone --depth=1 https://github.com/vcrhonek/hwdata .
 
 ./configure --prefix=/usr --disable-blacklist
 make install
-</code>
-</pre>
+{% endcall %}
 
 {% endblock %}

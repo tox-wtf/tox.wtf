@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 
 {% block header %}
-    {{ macros.pwd(["pkgs", "libtree"]) }}
+    {{ m.pwd(["pkgs", "libtree"]) }}
 {% endblock %}
 
 {% block content %}
 <h3>::: ldd as a tree</h3>
 
-<pre><code>git clone --depth=1 https://github.com/haampie/libtree .
+{% call m.codeblock() %}
+git clone --depth=1 https://github.com/haampie/libtree .
 
 make
 make PREFIX=/usr install
-</code></pre>
+{% endcall %}
 
 {% endblock %}

@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
 {% block header %}
-    {{ macros.pwd(["pkgs", "rg"]) }}
+    {{ m.pwd(["pkgs", "rg"]) }}
 {% endblock %}
 
 {% block content %}
 <h3>::: Recursive grep</h3>
 
-<pre><code>git clone --depth=1 https://github.com/burntsushi/ripgrep .
+{% call m.codeblock() %}
+git clone --depth=1 https://github.com/burntsushi/ripgrep .
 
 cargo build --release --features=pcre2
 install -vDm755 target/release/rg -t /usr/bin/
@@ -16,6 +17,6 @@ rg --generate complete-bash |
     install -vDm644 /dev/stdin /usr/share/bash-completion/completions/rg
 rg --generate man           |
     install -vDm644 /dev/stdin /usr/share/man/man1/rg.1
-</code></pre>
+{% endcall %}
 
 {% endblock %}

@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 
 {% block header %}
-    {{ macros.pwd(["pkgs", "xxhash"]) }}
+    {{ m.pwd(["pkgs", "xxhash"]) }}
 {% endblock %}
 
 {% block content %}
 <h3>::: Extremely fast non-cryptographic hash algorithm</h3>
 
-<pre><code>git clone --depth=1 https://github.com/haampie/libtree .
+{% call m.codeblock() %}
+git clone --depth=1 https://github.com/haampie/libtree .
 
 make PREFIX=/usr DISPATCH=1
 make PREFIX=/usr DISPATCH=1 install
 rm -vf /usr/lib/libxxhash.a
-</code></pre>
+{% endcall %}
 
 {% endblock %}

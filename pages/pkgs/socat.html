@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
 {% block header %}
-    {{ macros.pwd(["pkgs", "socat"]) }}
+    {{ m.pwd(["pkgs", "socat"]) }}
 {% endblock %}
 
 {% block content %}
 <h3>::: Multipurpose relay</h3>
 
-<pre><code>curl -fsSL http://www.dest-unreach.org/socat/download/socat-1.8.0.3.tar.gz |
+{% call m.codeblock() %}
+curl -fsSL http://www.dest-unreach.org/socat/download/socat-1.8.0.3.tar.gz |
     tar --strip-components=1 -xzf -
 
 ./configure         \
@@ -16,6 +17,6 @@
 
 make
 make install
-</code></pre>
+{% endcall %}
 
 {% endblock %}

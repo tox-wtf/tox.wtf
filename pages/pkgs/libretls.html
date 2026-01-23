@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 
 {% block header %}
-    {{ macros.pwd(["pkgs", "libretls"]) }}
+    {{ m.pwd(["pkgs", "libretls"]) }}
 {% endblock %}
 
 {% block content %}
 <h3>::: Port of libtls from libressl to openssl</h3>
 
-<pre><code>git clone --depth=1 https://git.causal.agency/libretls .
+{% call m.codeblock() %}
+git clone --depth=1 https://git.causal.agency/libretls .
 
 autoreconf -fiv
 
 ./configure --prefix=/usr
 make
 make install
-</code></pre>
+{% endcall %}
 
 {% endblock %}

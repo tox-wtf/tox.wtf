@@ -1,20 +1,18 @@
 {% extends "base.html" %}
 
 {% block header %}
-    {{ macros.pwd(["pkgs", "entr"]) }}
+    {{ m.pwd(["pkgs", "entr"]) }}
 {% endblock %}
 
 {% block content %}
 <h3>::: Run arbitrary commands on file change</h3>
 
-<pre>
-<code>
+{% call m.codeblock() %}
 git clone --depth=1 https://github.com/eradman/entr .
 
 ./configure
 make
 make PREFIX=/usr install
-</code>
-</pre>
+{% endcall %}
 
 {% endblock %}

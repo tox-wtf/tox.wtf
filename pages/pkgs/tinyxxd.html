@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 
 {% block header %}
-    {{ macros.pwd(["pkgs", "tinyxxd"]) }}
+    {{ m.pwd(["pkgs", "tinyxxd"]) }}
 {% endblock %}
 
 {% block content %}
 <h3>::: Standalone implementation of vim's xxd</h3>
 
-<pre><code>git clone --depth=1 https://github.com/xyproto/tinyxxd .
+{% call m.codeblock() %}
+git clone --depth=1 https://github.com/xyproto/tinyxxd .
 
 make
 make install
 
 install -vDm644 tinyxxd.1 /usr/share/man/man1/xxd.1
 mv -vf /usr/bin/{tiny,}xxd
-</code></pre>
+{% endcall %}
 
 {% endblock %}
