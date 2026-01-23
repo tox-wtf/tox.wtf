@@ -8,5 +8,5 @@ all: build
 	mkdir -pv ../../target/subdomains/man
 
 build: ../../target/tmp/man ../../target/subdomains/man
-	rsync -avu --delete ../../target/tmp/man/ ../../target/subdomains/man/
+	rsync -avu ../../target/tmp/man/ ../../target/subdomains/man/
 	cp -af s ../../target/subdomains/man
