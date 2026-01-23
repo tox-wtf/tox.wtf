@@ -141,18 +141,21 @@ fn main() -> Result<()> {
     render_pages(&env)?;
 
     env.clear_templates();
-    add_template_from_path(&mut env, "subdomains/man/index.html")?;
+    add_template_from_path(&mut env, "subdomains/man/macros.html")?;
     add_template_from_path(&mut env, "subdomains/man/base.html")?;
+    add_template_from_path(&mut env, "subdomains/man/index.html")?;
     render_subdomain_pages(&env, "man")?;
 
     env.clear_templates();
-    add_template_from_path(&mut env, "subdomains/vat/index.html")?;
+    add_template_from_path(&mut env, "subdomains/vat/macros.html")?;
     add_template_from_path(&mut env, "subdomains/vat/base.html")?;
+    add_template_from_path(&mut env, "subdomains/vat/index.html")?;
     render_subdomain_pages(&env, "vat")?;
 
     env.clear_templates();
-    add_template_from_path(&mut env, "subdomains/lfs/index.html")?;
+    add_template_from_path(&mut env, "subdomains/lfs/macros.html")?;
     add_template_from_path(&mut env, "subdomains/lfs/base.html")?;
+    add_template_from_path(&mut env, "subdomains/lfs/index.html")?;
     render_subdomain_pages(&env, "lfs")?;
 
     Ok(())
