@@ -1,10 +1,20 @@
+/* Disable scrollbar */
+@-moz-document url-prefix() {
+    html{
+        scrollbar-width: none;
+    }
+}
+
+/* Disable scrollbar */
 body::-webkit-scrollbar pre::-webkit-scrollbar {
     display: none;
 }
 
-body pre {
+/* Disable scrollbar */
+html body pre {
     -ms-overflow-style: none;
     scrollbar-width: none;
+    overflow: auto;
 }
 
 /* TODO: Woff2 these fonts */
@@ -22,35 +32,62 @@ body pre {
     font-style: normal;
 }
 
-body {
-    font-family: iosevka;
-    background-color: #17161A;
-    text-align: left;
-    color: #eeeefe;
-    margin: 2rem;
+@font-face {
+    font-family: inter;
+    src: url('/s/fonts/inter.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
-title {
+main {
+    flex: 1;
+}
+
+html, body {
+    margin: 0;
+}
+
+body {
+    font-size: 90%;
+    font-family: iosevka;
+    background-color: #17161A;
+    color: #eeeefe;
+
+    padding-left: 1rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
     font-family: stack_sans_notch;
-    text-align: right;
+    text-align: center;
     background-color: #17161A;
     color: #eeeefe;
 }
 
 header {
     font-family: stack_sans_notch;
-    text-align: right;
-    background-color: #17161A;
+    text-align: center;
     color: #eeeefe;
 }
 
-footer {
-    font-family: sharetech;
-    text-align: left;
-    background: #17161A;
-    color: #EBB894;
+.logo {
+    font-family: inter;
+    margin: 0;
+    line-height: 0.8;
 }
 
+footer p {
+    font-size: 80%;
+    font-family: stack_sans_notch;
+}
+
+footer {
+    text-align: center;
+    color: #EBB894;
+    padding: 0;
+}
 
 blockquote {
     font-family: sharetech;
@@ -69,7 +106,6 @@ blockquote p {
 
 /* links */
 a {
-    font-family: sharetech;
     color: #EBB894;
     text-decoration: none;
 }
@@ -100,8 +136,10 @@ pre {
     border: 1px solid #EBB894;
 
     overflow-x: auto;
-    padding: 0.5em;
-    padding-left: 1em;
+    padding: 0.5rem;
+    padding-left: 1rem;
+
+    margin-right: 1rem;
 }
 
 code {

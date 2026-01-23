@@ -1,0 +1,11 @@
+{% macro pwd(parts) %}
+<h2><a href="/">/</a>{% set ns = namespace(path="") %}{% for part in parts %}{% set ns.path = ns.path ~ "/" ~ part %}{% if loop.last %}<a href="{{ ns.path }}">{{ part }}</a>{% else %}<a href="{{ ns.path }}/">{{ part }}/</a>{% endif %}{% endfor %}</h2>
+{% endmacro %}
+
+{%- macro codeblock(caller=None) -%}
+{%- set content = caller() -%}
+{%- if content[:1] == '\n' -%}
+    {%- set content = content[1:] -%}
+{%- endif -%}
+<pre><code>{{ content | e }}</code></pre>
+{%- endmacro -%}
