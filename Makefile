@@ -11,7 +11,7 @@ clean:
 purge:
 	rm -rf target
 
-target/tmp/pages/index.html:
+target/tmp/pages/index.html: pages
 	mkdir -pv target/tmp/pages
 	cp -af pages -T target/tmp/pages
 	for badge in s/88x31/*; do \
@@ -23,6 +23,7 @@ target/tmp/pages/index.html:
 build: Cargo.toml subdomains target/tmp/pages/index.html
 	cargo run
 	cp -af s target/site
+	cp -f target/tmp/pages/robots.txt target/site/robots.txt
 
 # tidy: build subdomains
 # 	find target/site -type f -iname '*.html' -print0 | xargs -0 tidy -m -config tidyconf
