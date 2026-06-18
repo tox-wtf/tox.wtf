@@ -6,14 +6,18 @@ THEME=sunset
 
 status=0
 for book in lfs slfs glfs blfs; do
-    rm -rf "$book/target"
-
     (
         set -eu
         cd "$book"
 
+        if cmp sha target/sha; then
+            echo "Skipping build for $book"
+            exit 0
+        fi
+
+        rm -rf target
         echo "Building $book"
-        THEME="$THEME" ./build.sh
+        THEME="$THEME" ./build.sh && cp -vf sha target/sha
     ) || status=1
 done
 
