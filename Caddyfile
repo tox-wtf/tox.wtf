@@ -1,7 +1,8 @@
-{
-    # curl defaults to HTTP, but I like to omit the protocol when invoking it
-    auto_https disable_redirects
-}
+# NOTE: This belongs in the global Caddyfile at /etc/caddy/Caddyfile
+# {
+#     # curl defaults to HTTP, but I like to omit the protocol when invoking it
+#     auto_https disable_redirects
+# }
 
 (robots) {
     @aibots {
