@@ -1,21 +1,25 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Configuration options
+THEME=sunset
+
+status=0
 for book in lfs slfs glfs blfs; do
-    for rev in sysv systemd; do
-        (
-            set -euo pipefail
-            cd "$book"
+    rm -rf "$book/target"
 
-            if diff sha "build-sha-$rev" &>/dev/null; then
-                echo "Skipping $book-$rev"
-                exit 0
-            fi
+    (
+        set -eu
+        cd "$book"
 
-            echo "Building $book-$rev"
-            make REV=$rev THEMEDIR=../themes/themes THEME=sunset AUTO_CLEAN=0
-            make REV=$rev INSTALLROOT=../../../target/subdomains/lfs install
-            cp -f sha "build-sha-$rev"
-        )
-    done
+        echo "Building $book"
+        THEME="$THEME" ./build.sh
+    ) || status=1
 done
+
+case $status in
+    0) echo "Built all books" ;;
+    *) echo "Failed to build one or more books" >&2 ;;
+esac
+
+exit $status
