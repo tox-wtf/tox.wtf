@@ -23,7 +23,8 @@ target/tmp/pages/index.html: pages
 build: Cargo.toml subdomains target/tmp/pages/index.html
 	cargo run
 	cp -af s target/site
-	cp -f target/tmp/pages/robots.txt target/site/robots.txt
+	install -Dm644 robots.txt -t target/shared/
+	install -Dm644 target/site/e/* -t target/shared/e/
 
 # tidy: build subdomains
 # 	find target/site -type f -iname '*.html' -print0 | xargs -0 tidy -m -config tidyconf
@@ -43,7 +44,7 @@ subdomain-vat:
 serve: build
 	caddy run --config Caddyfile
 
-local-serve: build
+local-serve:
 	caddy run --config Caddyfile.local
 
 dev: clean build local-serve
