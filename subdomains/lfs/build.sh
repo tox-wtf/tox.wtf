@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 # Configuration options
 THEME=sunset
 
@@ -12,12 +14,16 @@ for book in lfs slfs glfs blfs; do
 
         if cmp sha target/sha; then
             echo "Skipping build for $book"
-            exit 0
+        else
+            rm -rf target
+            echo "Building $book"
+            THEME="$THEME" ./build.sh && cp -vf sha target/sha
         fi
 
-        rm -rf target
-        echo "Building $book"
-        THEME="$THEME" ./build.sh && cp -vf sha target/sha
+        # TODO: Probably rsync would be better
+        echo "Copying files into place for $book"
+        mkdir -pv "$SCRIPT_DIR/../../target/subdomains/lfs/$book"
+        cp -af target/book -T "$SCRIPT_DIR/../../target/subdomains/lfs/$book"
     ) || status=1
 done
 
