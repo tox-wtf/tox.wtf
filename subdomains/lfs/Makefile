@@ -5,4 +5,4 @@ all:
 	cp -af s -T ../../target/subdomains/lfs/s
 
 clean:
-	rm -rf *lfs/sha *lfs/build-sha-*
+	rm -rf *lfs/sha *lfs/target
